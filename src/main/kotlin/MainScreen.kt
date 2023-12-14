@@ -9,7 +9,7 @@ class MainScreen {
             println("1. Burger")
             println("2. Happy Snack")
             println("3. Sides & Desserts")
-            println("4. McCafe & Beverages\n")
+            println("4. McCafe & Beverages")
             println("==== user menu ====")
             println("5. Check Cart")
             println("6. Membership Menu")

@@ -1,10 +1,12 @@
 import kotlin.system.exitProcess
 
 class BurgerMenu: MenuInterface {
-    var choice = 0
+    private var choiceString: String = ""
+    private var choice = 0
     private var option = 0
-    lateinit var selectedBurger: MenuInfo
-    val burgerList: MutableList<MenuInfo> = mutableListOf(
+    private lateinit var selectedBurger: MenuInfo
+    var payment = Payment()
+    private val burgerList: MutableList<MenuInfo> = mutableListOf(
         MenuInfo("home", 0, 0.0, false),
         MenuInfo("Big Mac®", 1, 5.5, false),                //0
         MenuInfo("Big Mac® - Meal", 1, 6.9, true),          //1 -> 1
@@ -31,14 +33,20 @@ class BurgerMenu: MenuInterface {
                     else println("  /  ${menu.price}￦")
                 }
             }
-            println("9. Home    0. Exit")
-            println("======================================")
+
             Cart.printMenuInCart()
-            println("======================================")
+            print("9. Home    0. Exit")
+            if (Cart.myCart.size == 0) println("")
+            else println("     q: Order")
             print("Input: ")
             // 사용자 입력 부분
             try {
-                choice = readln().toInt()
+                choiceString = readln()
+                if(choiceString == "q") {
+                    payment.payment()
+                    return burgerList[0]
+                }
+                choice = choiceString.toInt()
                 if(choice in 7..8 || choice < 0 || choice > 9){
                     println("목록에 없는 선택 입니다.")
                     continue
@@ -65,6 +73,5 @@ class BurgerMenu: MenuInterface {
             }
             return selectedBurger
         }
-
     }
 }
