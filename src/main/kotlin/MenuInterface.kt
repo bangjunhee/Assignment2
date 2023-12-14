@@ -1,3 +1,3 @@
 interface MenuInterface {
-    fun printMenu(): Int
+    fun printMenu(): MenuInfo
 }

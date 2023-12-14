@@ -1,18 +1,33 @@
 
 class SIdeMenu: MenuInterface {
     private var choice = 0
-    override fun printMenu(): Int {
+    val sideList: MutableList<MenuInfo> = mutableListOf(
+        MenuInfo("home", 0, 0.0, false),
+        MenuInfo("Tomato Chicken Snack Wrap", 1, 3.0, false),
+        MenuInfo("Coleslaw", 2, 1.9, false),
+        MenuInfo("French Fries", 3, 2.2, false),
+        MenuInfo("McNuggets®", 4, 2.6, false),
+        MenuInfo("Ice Cream Cone", 5, 1.7, true),
+        MenuInfo("Oreo McFlurry", 6, 3.3, true),
+        MenuInfo("Oreo Affogato", 7, 3.8, true)
+    )
+    override fun printMenu(): MenuInfo {
         while(true) {
-            println("\n\n\n\n\n")
-            println("           [ Sides Menu ]           ")
-            println("1. Tomato Chicken Snack Wrap  |  3.0")
-            println("2. Coleslaw                   |  1.9")
-            println("3. French Fries               |  2.2")
-            println("4. McNuggets®                 |  2.6")
-            println("          [ Desserts Menu ]         ")
-            println("5. Ice Cream Cone             |  1.1")
-            println("6. Oreo McFlurry              |  3.3")
-            println("7. Oreo Affogato              |  3.8\n")
+            println("\n\n")
+            println("        [ Sides Menu ]           ")
+            for (menu in sideList) {
+                if (!menu.option) {
+                    menu.displayInfo()
+                    println("")
+                }
+            }
+            println("       [ Desserts Menu ]         ")
+            for (menu in sideList) {
+                if (menu.option) {
+                    menu.displayInfo()
+                    println("")
+                }
+            }
             println("9. Home     0. Exit")
             println("====================================")
             try {
@@ -27,6 +42,6 @@ class SIdeMenu: MenuInterface {
                 continue
             }
         }
-        return choice
+        return sideList[0]
     }
 }

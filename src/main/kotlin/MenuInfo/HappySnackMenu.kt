@@ -1,15 +1,21 @@
 
 class HappySnackMenu: MenuInterface {
     private var choice = 0
-    val snackList: MutableList<MenuInfo> = mutableListOf()
-    override fun printMenu(): Int {
+    val snackList: MutableList<MenuInfo> = mutableListOf(
+        MenuInfo("home", 0, 0.0, false),
+        MenuInfo("Sausage Snack Wrap", 1, 3.1, false),
+        MenuInfo("Taro Pie", 2, 1.8, false),
+        MenuInfo("McSpicy® Chicken Tenders 2pcs", 3, 2.2, false),
+        MenuInfo("Golden Mozzarella Cheese Sticks 2pcs", 4, 2.0, false)
+    )
+    override fun printMenu(): MenuInfo {
         while(true) {
-            println("\n\n\n\n\n")
+            println("\n\n")
             println("                [ Snack Menu ]                ")
-            println("1. Sausage Snack Wrap                   |  3.1")
-            println("2. Taro Pie                             |  1.8")
-            println("3. McSpicy® Chicken Tenders 2pcs        |  2.2")
-            println("4. Golden Mozzarella Cheese Sticks 2pcs |  2.0\n")
+            for (menu in snackList){
+                menu.displayInfo()
+                println("")
+            }
             println("9. Home    0. Exit")
             println("==============================================")
             try {
@@ -24,6 +30,6 @@ class HappySnackMenu: MenuInterface {
                 continue
             }
         }
-        return choice
+        return snackList[0]
     }
 }
