@@ -3,7 +3,7 @@ import kotlin.system.exitProcess
 class BurgerMenu: MenuInterface {
     var choice = 0
     private var option = 0
-    var cart = Cart()
+    lateinit var selectedBurger: MenuInfo
     val burgerList: MutableList<MenuInfo> = mutableListOf(
         MenuInfo("home", 0, 0.0, false),
         MenuInfo("Big Mac®", 1, 5.5, false),                //0
@@ -33,7 +33,7 @@ class BurgerMenu: MenuInterface {
             }
             println("9. Home    0. Exit")
             println("======================================")
-            cart.printMenuInCart()
+            Cart.printMenuInCart()
             println("======================================")
             print("Input: ")
             // 사용자 입력 부분
@@ -52,7 +52,7 @@ class BurgerMenu: MenuInterface {
                     println("1. Meal  /  2. Burger")
                     option = readln().toInt()
                     // 선택에 맞는 MenuInfo 클래스를 배열 인덱스로 리턴
-                    return if (option == 1) burgerList[(choice*2)]
+                    selectedBurger = if (option == 1) burgerList[(choice*2)]
                     else if(option == 2) burgerList[choice*2-1]
                     else{
                         println("목록에 없는 선택 입니다.")
@@ -63,6 +63,7 @@ class BurgerMenu: MenuInterface {
                 println("숫자로 입력하세요.")
                 continue
             }
+            return selectedBurger
         }
 
     }
