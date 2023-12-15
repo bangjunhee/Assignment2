@@ -1,3 +1,6 @@
+import MenuHandler.MainScreen
+import MenuHandler.MenuControl
+
 fun main() {
     val mainScreen = MainScreen()
     val menuPrint = MenuControl()

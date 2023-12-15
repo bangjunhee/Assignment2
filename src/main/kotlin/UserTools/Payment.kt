@@ -1,3 +1,5 @@
+package UserTools
+
 import kotlin.math.round
 
 class Payment {
@@ -16,8 +18,10 @@ class Payment {
                     println("Not enough money!")
                     continue
                 } else {
+
                     println("Recieved Amount: $money   Total Price: ${Cart.sumPrice}")
                     println("Changes: ${round((money - Cart.sumPrice) * 10) / 10}")
+                    println("Thank you!")
                     readlnOrNull()
                     Cart.myCart = mutableListOf()
                     break

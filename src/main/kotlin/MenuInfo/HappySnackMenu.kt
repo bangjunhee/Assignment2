@@ -1,20 +1,21 @@
+import MenuInfo.MenuInfo
+import MenuHandler.MenuInterface
+import MenuInfo.MenuList
+import UserTools.Cart
+import UserTools.Payment
 import kotlin.system.exitProcess
 
 class HappySnackMenu: MenuInterface {
+    private var choiceString: String = ""
     private var choice = 0
     private lateinit var selectedSnack: MenuInfo
-    val snackList: MutableList<MenuInfo> = mutableListOf(
-        MenuInfo("home", 0, 0.0, false),
-        MenuInfo("Sausage Snack Wrap", 1, 3.1, false),
-        MenuInfo("Taro Pie", 2, 1.8, false),
-        MenuInfo("McSpicy® Chicken Tenders 2pcs", 3, 2.2, false),
-        MenuInfo("Golden Mozzarella Cheese Sticks 2pcs", 4, 2.0, false)
-    )
+    var payment = Payment()
+    var menuList = MenuList().snackList
     override fun printMenu(): MenuInfo {
         while(true) {
-            println("\n\n")
+            println("\n\n\n\n\n\n\n\n\n\n\n\n\n")
             println("                [ Snack Menu ]                ")
-            for (menu in snackList) {
+            for (menu in menuList) {
                 if (menu.number != 0) {
                     menu.displayInfo()
                     println("")
@@ -24,17 +25,25 @@ class HappySnackMenu: MenuInterface {
             print("9. Home    0. Exit")
             if (Cart.myCart.size == 0) println("")
             else println("     q: Order")
+            print("Input: ")
             try {
-                choice = readln().toInt()
+                choiceString = readln()
+                if(choiceString == "q") {
+                    payment.payment()
+                    return menuList[0]
+                }
+                choice = choiceString.toInt()
                 if(choice in 5..8 || choice < 0 || choice > 9){
                     println("목록에 없는 선택 입니다.")
+                    readlnOrNull()
                     continue
                 }
-                else if(choice == 9) return snackList[0]
+                else if(choice == 9) return menuList[0]
                 else if (choice == 0) exitProcess(0)
-                else selectedSnack = snackList[choice]
+                else selectedSnack = menuList[choice]
             } catch (e: NumberFormatException) {
                 println("숫자로 입력하세요.")
+                readlnOrNull()
                 continue
             }
             return selectedSnack
